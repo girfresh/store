@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyFresh7's Fresh Market Ahmedabad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,200&family=Teko&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Corben&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mirza:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* CSS से डिज़ाइन स्टाइल दें */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0px;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0;
+            background-color: #FCE552;
+            padding: 20px;
+            padding-bottom: 180px;
+            padding-top: 0px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #86AD02;
+            border-radius: 0px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* जोन को छिपाएं */
+        .section {
+            display: none;
+        }
+
+        /* जोन के बदलने पर प्रदर्शित करें */
+        .section.active {
+            display: block;
+        }
+
+        .item-desk {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 20px;
+            margin-top: 20px;
+            
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #2D7B02;
+            
+            border-radius: 15px;
+            background-color: #fff;
+    }
+
+        .catalog-item {
+            display: flex;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 0px solid #2D7B02;
+            
+            
+            background-color: #fff;
+        }
+
+        
+
+        .item-image {
+            flex: 1;
+            max-width: 100px;
+            border-right: 0px solid #000;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+            padding-left: 0px;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .pro-image {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pro-image img {
+        max-width: 50%;
+        height: auto;
+    }
+
+        .item-details {
+            flex: 2;
+            padding-left: 20px;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 22px;
+            margin-bottom: 5px;
+            margin-top: -10px;
+            font-family: 'Caveat', cursive;
+        }
+
+        .item-description.in-stock {
+            font-size: 12px;
+            color: green;
+            margin-bottom: 5px;
+            font-weight: bold;
+            margin-top: -5px;
+            font-family: 'Corben', serif;
+        }
+
+        .item-description.out-of-stock {
+            color: red;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            margin-top: -5px;
+            font-family: 'Corben', serif;
+        }
+
+        .item-information {
+            font-size: 16px;
+            color: darkred;
+            margin-bottom: 5px;
+            font-weight: bold;
+            margin-top: -5px;
+            font-family: 'Mirza', serif;
+        }
+
+        .quantity-dropdown {
+            width: 80%;
+            height: 30px;
+            padding: 4px;
+            border: 1px solid #A9C253;
+            border-radius: 10px;
+            font-size: 12px;
+            font-family: 'Corben', serif;
+        }
+
+        .mobile-number-input,
+        .delivery-dropdown,
+        .address-input,
+        .pin-input,
+        .coupon-input,
+        .remark-input,
+        .name-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            margin-right: 0px;
+            margin-left: -10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-element {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .terms-checkbox {
+            margin-right: 5px;
+            margin-bottom: 0px;
+        }
+
+        .terms-checkbox a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .place-order-button {
+            background-color: #A8BD01;
+            color: #060605;
+            border: 1px solid;
+            border-color: #000501;
+            padding: 5px 10px;
+            margin-top: 15px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            cursor: pointer;
+            box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3); /* Shadow ka code yahaan hai */
+        }
+
+        .place-order-button:hover {
+            background-color: #128C7E;
+        }
+
+        /* Dropdown स्टाइल दें */
+        #section-selector {
+            width: 100%;
+            padding: 2px;
+            margin-bottom: 5px;
+            margin-top: -5px;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            background-color: #333;
+            color: #FFFFFF
+        }
+
+        .selector-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FCFCF9;
+    margin-bottom: 5px;
+    animation: bounceUp 2s infinite;
+    transform-origin: center bottom;
+}
+
+@keyframes bounceUp {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+        .section-selector-zone {
+    width: 100%;
+    padding: 15px 0px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    background-color: #68DF28;
+    z-index: 100;
+    text-align: center;
+    position: sticky; /* Section selector ko sticky position mein set karega */
+    top: 0; /* Section selector ko top se sticky karega */
+    background-image: url('#');
+    background-size: cover; /* Background image ko div ke size ke accordingly scale karega */
+    background-repeat: no-repeat; /* Background image ko repeat nahi karega */
+    background-position: center center; /* Background image ko horizontally aur vertically center mein rakhega */
+
+    }
+
+    p {
+    font-size: 12px;
+    color: #FBF8F8;
+    font-weight: bold;
+    background-color: rgba(5, 5, 5, 0.5); /* White color with 50% opacity */
+    padding: 5px; /* Padding to create space around text */
+    }
+
+
+
+   .banner-image {
+    width: 100%; /* Width ko 100% set kare to image div ke width ke equal ho jayegi */
+    max-height: 110px; /* Maximum height set kare, agar image isse choti hoti hai to yeh size maintain rahega */
+    }
+
+    .ads-container {
+    width: 300px;
+    height: 100px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    margin: 0 auto; /* Auto margin to center horizontally */
+    position: relative; /* Set position to relative */
+}
+
+.ads-container img {
+    width: 100%; /* Scale the image to the div's width */
+    height: auto; /* Auto height to maintain aspect ratio */
+}
+
+.ads-text {
+    position: absolute; /* Set position to absolute */
+    bottom: 0; /* Place text at the bottom */
+    left: 0; /* Place text at the left */
+    width: 100%; /* Text width same as the container */
+    background-color: rgba(5, 5, 5, 0.2); /* White color with 50% opacity */
+    padding: 0px; /* Padding to create space around text */
+    text-align: right; /* Center text horizontally */
+}
+
+.ads-text p {
+    font-size: 12px;
+    color: #FBF8F8;
+    font-weight: bold;
+    margin: 0; /* Remove margin to prevent spacing issues */
+}
+
+.ads-text a {
+    color: #F2FD04;
+    text-decoration: none; /* Remove underline from link */
+    font-size: 15px;
+}
+
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #4B5F02;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .place-order-button {
+            position: relative;
+            z-index: 0;
+        }
+
+        #total-display {
+            color: #FEFE7B;
+            margin-top: -5px;
+            font-family: 'Corben', serif;
+        }
+
+        #selected-item-count {
+            color: #FBE4A8;
+            margin-top: -5px;
+            font-family: 'Corben', serif;
+        }
+
+        /* Style for "Send WhatsApp" button */
+        .send-whatsapp-button {
+            background-color: #01A701;
+            color: #FBFCFB;
+            border: none;
+            padding: 5px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3); /* Shadow ka code yahaan hai */
+        }
+
+        /* Hover effect for "Send WhatsApp" button */
+        .send-whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+
+        /* Style for "Clear" button */
+        .clear-button {
+            background-color: #FF5733;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        /* Hover effect for "Clear" button */
+        .clear-button:hover {
+            background-color: #D64028;
+        }
+
+        /* Style for the button description */
+        .button-description {
+            font-size: 14px;
+            font-weight: bold;
+            color: #E68201;
+            margin-top: 15px;
+            margin-bottom: -10px;
+        }
+
+        /* CSS code for the checkout button */
+        .checkout-button {
+    background-color: #CCDD04;
+    color: #020300;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3); /* Shadow ka code yahaan hai */
+}
+
+        /* CSS code for button hover effect (optional) */
+        .checkout-button:hover {
+            background-color: #25CA04;
+        }
+
+        .required {
+            color: red;
+            margin-left: 4px;
+        }
+    </style>
+    <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfKGEnZAGXw6g7nL_x1_GgRctZucrFzTp8dLuNDtJYUiW08Jw/formResponse" method="post">
+</head>
+<body>
+<div class="container">
+    <!-- select section -->
+    
+
+
+
+    
+    <!-- Fresh Vegetables Section -->
+    <div id="packed-food-items" class="section1">
+        <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/premium-kesar-mango2.jpg" alt="Kesar-Mango-Premium">
+        </div>
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Kesar-Mango-Premium">Kesar Mango Premium</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">15 Mango Aprx. 3.8kg (₹980)</div>
+            <select class="quantity-dropdown" name="entry.1683533608">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹980/">1  |  ₹980/</option>
+                <option value="2  |  ₹1960/">2  |  ₹1960/</option>
+                <option value="3  |  ₹2940/">3  |  ₹2940/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    <div class="item-desk">
+
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/janglee-kesar-mango-rippened-2.jpg" alt="Medium-Kesar-Mango">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Medium-Kesar-Mango">Medium Kesar Mango</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">16 Mango Aprx. 3.5kg (₹780)</div>
+            <select class="quantity-dropdown" name="entry.2132754751">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹780/">1  |  ₹780/</option>
+                <option value="2  |  ₹1560/">2  |  ₹1560/</option>
+                <option value="3  |  ₹2340/">3  |  ₹2340/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/extraordenery-kesar-mango-3.jpg" alt="extraordenery-kesar-mango">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Extraordenery-Kesar-Mango">Extraordenery-Kesar-Mango</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">12 Mango Aprx. 3.6kg (₹1080)</div>
+            <select class="quantity-dropdown" name="entry.979064798">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹1080/">1  |  ₹1080/</option>
+                <option value="2  |  ₹2160/">2  |  ₹2160/</option>
+                <option value="3  |  ₹3240/">3  |  ₹3240/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/extraordenery-kesar-mango-6.jpg" alt="Raw-Kesar-Mango-Premium-4.5kg">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Raw-Kesar-Mango-Premium-4.5kg">Raw Kesar Mango Premium 4.5kg</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">₹780</div>
+            <select class="quantity-dropdown" name="entry.641798540">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹780/">1  |  ₹780/</option>
+                <option value="2  |  ₹1560/">2  |  ₹1560/</option>
+                <option value="3  |  ₹2340/">3  |  ₹2340/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/extraordenery-kesar-mango-7.jpg" alt="Raw-Kesar-Mango-Premium-9.5kg">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Raw-Kesar-Mango-Premium-9.5kg">Raw Kesar Mango Premium 9.5kg</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">₹1480</div>
+            <select class="quantity-dropdown" name="entry.1573693572">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹1480/">1  |  ₹1480/</option>
+                <option value="2  |  ₹2960/">2  |  ₹2960/</option>
+                <option value="3  |  ₹4440/">3  |  ₹4440/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/extraordenery-kesar-mango-2.jpg" alt="Raw-Kesar-Mango-Medium-4.5kg">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Raw-Kesar-Mango-Medium-4.5kg">Raw Kesar Mango Medium 4.5kg</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">₹680</div>
+            <select class="quantity-dropdown" name="entry.131049574">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹680/">1  |  ₹680/</option>
+                <option value="2  |  ₹1360/">2  |  ₹1360/</option>
+                <option value="3  |  ₹2040/">3  |  ₹2040/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/ver-kesar-mango3.jpg" alt="Raw-Kesar-Mango-Medium-9.5kg">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Raw-Kesar-Mango-Medium-9.5kg">Raw Kesar Mango Medium 9.5kg</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">₹1280</div>
+            <select class="quantity-dropdown" name="entry.677143633">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹1280/">1  |  ₹1280/</option>
+                <option value="2  |  ₹2560/">2  |  ₹2560/</option>
+                <option value="3  |  ₹3840/">3  |  ₹3840/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/designer-2024-03-07t095803.125.png" alt="Water-Preserved-Mango-Pickle">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Water-Preserved-Mango-Pickle">Water Preserved Mango Pickle</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">atheli keri 650g ₹280</div>
+            <select class="quantity-dropdown" name="entry.549872627">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹230/">1  |  ₹230/</option>
+                <option value="2  |  ₹460/">2  |  ₹460/</option>
+                <option value="3  |  ₹690/">3  |  ₹690/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/designer-2024-03-07t102921.268.png" alt="Keri-Murabba-Sweet">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Keri-Murabba-Sweet">Keri Murabba Sweet</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">700g ₹280</div>
+            <select class="quantity-dropdown" name="entry.1063279198">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹280/">1  |  ₹280/</option>
+                <option value="2  |  ₹560/">2  |  ₹560/</option>
+                <option value="3  |  ₹840/">3  |  ₹840/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/designer-2024-03-07t102601.412.png" alt="Keri-Murabba-Spice">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Keri-Murabba-Spice">Keri Murabba Spice</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">700g ₹280</div>
+            <select class="quantity-dropdown" name="entry.514274505">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹280/">1  |  ₹280/</option>
+                <option value="2  |  ₹560/">2  |  ₹560/</option>
+                <option value="3  |  ₹840/">3  |  ₹840/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    <div class="item-desk">
+        <div class="pro-image">
+            <img src="https://girfresh.files.wordpress.com/2024/03/designer-2024-03-07t104033.773.png" alt="Keri-Achhar">
+        </div>
+
+    <div class="catalog-item">
+        
+        <div class="item-details">
+            <div class="item-name" item-code="Keri-Achhar-700g">Keri Achhar 700g</div>
+            <div class="item-description in-stock">Pre-Booking Open</div>
+            <div class="item-information">₹280</div>
+            <select class="quantity-dropdown" name="entry.1279438054">
+                <option value="" disabled selected>Select Quantity</option>
+                <option value="">Clear Selection</option>
+                <option value="1  |  ₹280/">1  |  ₹280/</option>
+                <option value="2  |  ₹560/">2  |  ₹560/</option>
+                <option value="3  |  ₹840/">3  |  ₹840/</option>
+            </select>
+        </div>
+    </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+
+
+    
+
+
+
+
+    </div>
+
+
+    <!-- Fresh Fruits Section -->
+    <div id="kitchen-garden" class="section">
+        
+        <!-- Add your Fresh Fruits form items here -->
+        
+        
+
+
+    </div>
+
+    <!-- Exotic Vegetable Section -->
+        <div id="other1" class="section">
+            
+            <!-- Add your other1 form items here -->
+            
+
+         </div>
+         
+
+       <!-- Chopped Vegetable Section -->
+        <div id="other2" class="section">
+            
+            <!-- Add your other2 form items here -->
+            
+            
+          </div>  
+
+
+  
+
+
+
+
+
+
+
+            
+
+
+
+
+                 
+
+           
+
+            
+
+
+
+
+
+        
+
+    <div id="checkout" class="checkout-area">
+        
+    <h2>Checkout</h2>
+    <!-- Your Checkout form items here -->
+    <div class="form-element">
+        <label for="mobile-number-input">Mobile Number (Whatsapp) <span class="required">*</span></label>
+        <input class="mobile-number-input" type="tel" name="entry.1480851348" id="mobile-number-input" placeholder="Enter your mobile number" required>
+    </div>
+
+    </div>
+    <div class="form-element">
+        <label for="name-input">Full Name<span class="required">*</span></label>
+        <input class="name-input" type="text" name="entry.1846951036" id="name-input" placeholder="Enter Name" required>
+    </div>
+
+    <div class="form-element">
+        <label for="address-input">Full Address<span class="required">*</span></label>
+        <textarea class="address-input" type="text" name="entry.1053463803" id="address-input" placeholder="Enter Full Address" required></textarea>
+    </div>
+
+    <div class="form-element">
+        <label for="pin-input">Pin Code<span class="required">*</span></label>
+        <input class="pin-input" type="number" name="entry.2083544026" id="pin-input" placeholder="Enter Pin code" required>
+    </div>
+    <div class="form-element">
+        <label for="coupon-input">Coupon Code</label>
+        <input class="coupon-input" type="text" name="entry.814760402" id="coupon-input" placeholder="Enter coupon code">
+    </div>
+    <div class="form-element">
+        <label for="remark-input">Remark</label>
+        <textarea class="remark-input" name="entry.1766880090" id="remark-input" placeholder="Add any remarks"></textarea>
+    </div>
+    <div class="form-element">
+        <input class="terms-checkbox" type="checkbox" name="entry.466043783" id="terms-checkbox" value="I Agree" required>
+        <label for="terms-checkbox">I Agree <a href="terms_and_conditions.html">Terms and Conditions</a> (delivery charges will be applicable) <span class="required">*</span></label>
+    </div>
+
+    <div class="button-description">"Place Order" or Send order on "Whatsapp"</div>
+    <button class="place-order-button" type="submit">Book Order</button>
+    <p2>-</p2>
+    <button class="send-whatsapp-button" id="send-whatsapp-button">Send WhatsApp</button>
+    <p2>-</p2>
+    <button class="clear-button" type="button" id="clear-form-button">Clear</button>
+        
+    </div>
+    </div>
+</form>
+<div class="footer">
+    
+    <div id="total-display"></div>
+    <div id="selected-item-count"></div>
+    <button class="checkout-button" id="checkbox-button">Checkout</button>
+    
+</div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var sectionSelector = document.getElementById('section-selector');
+        var sections = document.querySelectorAll('.section');
+        var totalDisplay = document.getElementById('total-display');
+        var selectedItemCount = document.getElementById('selected-item-count');
+        var clearFormButton = document.getElementById('clear-form-button');
+        var sendWhatsAppButton = document.getElementById('send-whatsapp-button');
+        var quantityDropdowns = document.querySelectorAll('.quantity-dropdown');
+        var mobileNumberInput = document.querySelector('.mobile-number-input');
+        var nameInput = document.querySelector('.name-input');
+        var pinInput = document.querySelector('.pin-input');
+        var addressInput = document.querySelector('.address-input');
+        var couponInput = document.querySelector('.coupon-input');
+        var remarkInput = document.querySelector('.remark-input');
+        var cityNameInput = document.querySelector('input[name="entry.1846951036"]');
+        var cityName = cityNameInput.value;
+        var termsCheckbox = document.querySelector('.terms-checkbox');
+
+        // Set the default selected option to "Vegetable"
+
+
+        // Calculate Total Price and Selected Item Count
+        quantityDropdowns.forEach(function (dropdown) {
+            dropdown.addEventListener('change', function () {
+                calculateTotalPriceAndItemCount();
+            });
+        });
+
+        function calculateTotalPriceAndItemCount() {
+            var totalPrice = 0;
+            var itemCount = 0;
+
+            var itemsList = []; // Create an array to store item details
+
+            quantityDropdowns.forEach(function (dropdown) {
+                var selectedOption = dropdown.options[dropdown.selectedIndex];
+                var optionValue = selectedOption.value;
+
+                if (optionValue !== "" && optionValue !== "Clear Selection") {
+                    var itemName = dropdown.parentElement.querySelector('.item-name').textContent;
+                    var quantity = itemName.split(' ')[0]; // Extract quantity from item name
+                    var priceString = optionValue.split(' | ')[1];
+                    var price = parseInt(priceString.replace('₹', '').replace('/', '').trim());
+
+                    totalPrice += price;
+                    itemCount++;
+
+                    // Add item details to the list with the quantity included
+                    itemsList.push(`${itemCount}.${itemName} -- ${quantity} -- ₹${priceString}`);
+                }
+            });
+
+            totalDisplay.textContent = "Total Amount: ₹" + totalPrice;
+            selectedItemCount.textContent = "Items: " + itemCount;
+
+            // Display the items list in the desired format
+            var itemsDetails = "Items:\n" + itemsList.join('\n');
+            document.querySelector(".order-details").textContent = itemsDetails;
+        }
+
+        // Submit form function
+document.querySelector('form').addEventListener('submit', function (event) {
+    var isItemSelected = false;
+
+    quantityDropdowns.forEach(function (dropdown) {
+        var selectedOption = dropdown.options[dropdown.selectedIndex];
+        var optionValue = selectedOption.value;
+
+        if (optionValue !== "" && optionValue !== "Clear Selection") {
+            isItemSelected = true;
+        }
+    });
+
+    if (!isItemSelected) {
+        event.preventDefault(); // Prevent form submission if no item is selected
+        alert('Please select at least one item.'); // Show alert message
+    }
+});
+
+        // Clear Form Function
+        clearFormButton.addEventListener('click', function () {
+            sections.forEach(function (section) {
+                section.style.display = 'none';
+            });
+
+            sectionSelector.value = "";
+
+            // Reset quantity dropdowns and values
+            quantityDropdowns.forEach(function (dropdown) {
+                dropdown.value = "";
+            });
+
+            // Reset total and selected item count
+            totalDisplay.textContent = "Total Amount: ₹0";
+            selectedItemCount.textContent = "Items: 0";
+        });
+
+                 // Send WhatsApp Function
+sendWhatsAppButton.addEventListener('click', function () {
+    var mobileNumber = mobileNumberInput.value;
+    var selectedItems = [];
+    var selectedItemCounter = 0; // Counter for selected items
+    var isItemSelected = false; // Flag to check if any item is selected
+    var name = nameInput.value;
+    var address = addressInput.value;
+    var pinCode = pinInput.value;
+
+    if (!mobileNumber || !address || !pinCode || !termsCheckbox.checked || !name) {
+        alert('Please fill MOBILE NUMBER, ADDRESS, PIN Code, I AGREE terms & conditions before sending the order on WhatsApp.');
+        return; // Exit the function if any required field is empty
+    }
+
+    quantityDropdowns.forEach(function (dropdown) {
+        var selectedOption = dropdown.options[dropdown.selectedIndex];
+        var optionValue = selectedOption.value;
+
+        if (optionValue !== "" && optionValue !== "Clear Selection") {
+            var itemName = dropdown.parentElement.querySelector('.item-name').getAttribute('item-code');
+            var quantity = optionValue.split(' | ')[0];
+            var itemPrice = optionValue.split(' | ')[1];
+            selectedItemCounter++; // Increment the counter for each selected item
+            selectedItems.push(`*${selectedItemCounter}-•*  *${itemName}* - \nQty:${quantity} -- ${itemPrice}`);
+            isItemSelected = true; // Set the flag to true if any item is selected
+        }
+    });
+
+    if (!isItemSelected) {
+        // If no item is selected, show an alert
+        alert('Please select at least one item before sending the order.');
+        return; // Exit the function
+    }
+
+    // Rest of your code to create and send the WhatsApp message
+    var totalItems = selectedItems.length;
+    var totalAmount = totalDisplay.textContent.split(' ')[2];
+    var name = nameInput.value;
+    var address = addressInput.value;
+    var pinCode = pinInput.value;
+    var couponCode = couponInput.value;
+    var remark = remarkInput.value;
+    var whatsappMessage = `Order Details:
+    
+Items:
+
+${selectedItems.join('\n\n')}
+
+_Total Items:_ *${totalItems}*
+*Total Amount: ${totalAmount}*
+
+
+Coupon Code: ${couponCode}
+Remark: ${remark}
+
+Name: ${name}
+City: ${address}
+Area : ${pinCode}
+Mobile Number: ${mobileNumber}
+
+  _* Thank you_ `;
+
+    var whatsappLink = `https://wa.me/919638387887?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappLink, '_blank');
+});
+
+                 const checkoutButton = document.getElementById("checkbox-button");
+    const checkoutArea = document.getElementById("checkout");
+
+    checkoutButton.addEventListener("click", function() {
+        // Scroll to the checkout area smoothly if it exists
+        if (checkoutArea) {
+            checkoutArea.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+    });
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/637fb1a4b0d6371309d0f04c/1gilcrrch';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+
+</body>
+</html>
